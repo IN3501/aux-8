@@ -15,5 +15,8 @@ urlpatterns = [
 	path('modificar_ramo', views.modificar_ramo, name='modificar_ramo'),
 	path('new_user/', views.crear_usuario, name='new_user'),
 	path('new_user/create', views.usuario_creado, name='create_user'),
+	path('login', views.loginView, name='login'),
+	path('auth', views.auth, name='auth'),
+	path('logout', views.logoutView, name='logout'),
 ]
 

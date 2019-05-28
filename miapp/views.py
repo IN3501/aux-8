@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Estudiante, Proyecto, Grupo, Desafio, DesafiosEstudiantes,Ramo
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 #from .models import Proyecto
 
 
@@ -89,3 +90,18 @@ def usuario_creado(request):
 	contexto = {}
 	contexto['username'] = username	
 	return render(request, 'miapp/user_created.html', contexto)
+
+def loginView(request):
+	return render(request, 'miapp/login.html')
+
+def auth(request):
+	username = request.POST['username']
+	password = request.POST['password']
+	usuario = authenticate(username=username, password=password)
+	login(request, usuario)
+
+	return render(request, 'miapp/index.html')
+
+def logoutView(request):
+	logout(request)
+	return render(request, 'miapp/index.html')
