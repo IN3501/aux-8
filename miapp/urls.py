@@ -13,5 +13,7 @@ urlpatterns = [
 	path('added_ramo/', views.added_ramo, name='added_ramo'),
 	path('add_ramo', views.add_ramo, name='add_ramo'),
 	path('modificar_ramo', views.modificar_ramo, name='modificar_ramo'),
+	path('new_user/', views.crear_usuario, name='new_user'),
+	path('new_user/create', views.usuario_creado, name='create_user'),
 ]
 

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Estudiante, Proyecto, Grupo, Desafio, DesafiosEstudiantes,Ramo
+from django.contrib.auth.models import User
 #from .models import Proyecto
 
 
@@ -24,8 +25,6 @@ def add_proyecto(request):
 	proyecto.save()
 	
 	return render(request, 'miapp/added_project.html', contexto)
-
-
 
 
 def new_project(request):
@@ -66,3 +65,27 @@ def modificar_ramo(request):
 	registro.nombre_ramo=nuevo_nombre
 	registro.save()
 	return render(request, 'miapp/added_ramo.html')
+
+def crear_usuario(request):
+	contexto = {}
+	contexto['grupos'] = Grupo.objects.all()
+	return render(request, 'miapp/new_user.html', contexto)
+
+def usuario_creado(request):
+	nombre = request.POST['nombre']
+	correo = request.POST['mail']
+	numero = request.POST['numero']
+	grupo = Grupo.objects.get(pk=request.POST['grupo'])
+	apodo = request.POST['apodo']
+
+	username = request.POST['username']
+	password = request.POST['password']
+	user = User.objects.create_user(username=username, 
+		password=password)
+
+	estudiante = Estudiante(user=user, nombre=nombre, correo=correo,
+		grupo=grupo, apodo2=apodo)
+
+	contexto = {}
+	contexto['username'] = username	
+	return render(request, 'miapp/user_created.html', contexto)
