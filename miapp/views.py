@@ -86,6 +86,7 @@ def usuario_creado(request):
 
 	estudiante = Estudiante(user=user, nombre=nombre, correo=correo,
 		grupo=grupo, apodo2=apodo)
+	estudiante.save()
 
 	contexto = {}
 	contexto['username'] = username	
